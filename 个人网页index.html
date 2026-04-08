@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语言学视界 | 周依凝 · 汉语国际教育</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0d0f14;
+            background-image: radial-gradient(circle at 30% 40%, rgba(45, 115, 255, 0.08) 0%, transparent 30%),
+                              radial-gradient(circle at 80% 70%, rgba(0, 230, 200, 0.06) 0%, transparent 35%);
+            font-family: 'Inter', 'Segoe UI', 'Roboto', system-ui, -apple-system, sans-serif;
+            color: #eaeef2;
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .glass-panel {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(18, 22, 28, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(80, 140, 255, 0.2);
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 255, 255, 0.1) inset;
+            padding: 3rem 2.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        /* 左侧卡片：个人信息 + 额外兴趣模块（使左右更平衡） */
+        .profile-card {
+            background: rgba(10, 14, 19, 0.6);
+            border-radius: 2rem;
+            padding: 2rem 1.8rem;
+            border: 1px solid rgba(0, 255, 255, 0.15);
+            box-shadow: 0 20px 30px -15px #00000080;
+        }
+
+        .avatar-frame {
+            width: 140px;
+            height: 140px;
+            border-radius: 40% 60% 40% 60% / 60% 40% 60% 40%;
+            background: linear-gradient(135deg, #22d1ee, #3d5afe);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 0 30px #3d5afe60;
+            overflow: hidden;
+        }
+
+        .avatar-frame .avatar {
+            width: 130px;
+            height: 130px;
+            border-radius: inherit;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid rgba(255,255,255,0.2);
+        }
+
+        .name {
+            font-size: 2rem;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff, #b0dcff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.3rem;
+        }
+
+        .tagline {
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #96b3cf;
+            border-bottom: 1px solid #2d4055;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-line {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid #1f2b37;
+            font-size: 0.95rem;
+            color: #bdd3ec;
+        }
+
+        .info-line i {
+            width: 24px;
+            color: #3d9eff;
+            font-size: 1.1rem;
+        }
+
+        .info-line strong {
+            font-weight: 500;
+            color: #c4e0ff;
+            min-width: 85px;
+        }
+
+        .info-line a {
+            color: #bdd3ec;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .info-line a:hover {
+            color: #6eb5ff;
+        }
+
+        /* 左侧额外模块：语言工具/摄影装备 */
+        .extra-module {
+            margin-top: 2rem;
+            background: rgba(15, 22, 30, 0.6);
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            border: 1px solid #2a4055;
+        }
+        .extra-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: #b0dcff;
+            border-left: 3px solid #3d9eff;
+            padding-left: 0.8rem;
+        }
+        .extra-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+        }
+        .extra-tags span {
+            background: #1a2b3a;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #c9e1fa;
+        }
+        .extra-tags i {
+            margin-right: 5px;
+            color: #3d9eff;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1.8rem;
+        }
+        .social-links a {
+            background: #1f2b38;
+            width: 44px;
+            height: 44px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #b6d6ff;
+            font-size: 1.4rem;
+            transition: 0.25s ease;
+            border: 1px solid #304257;
+        }
+        .social-links a:hover {
+            background: #2a3c50;
+            color: #fff;
+            border-color: #3d9eff;
+            transform: translateY(-3px);
+        }
+
+        .status-line {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: #85a9cf;
+            background: #0e1722;
+            padding: 0.7rem 1rem;
+            border-radius: 40px;
+        }
+        .status-line .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #17d18b;
+            box-shadow: 0 0 8px #17d18b;
+        }
+
+        /* 右侧区域 */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        .card {
+            background: rgba(12, 18, 26, 0.5);
+            border-radius: 1.6rem;
+            padding: 1.5rem 1.8rem;
+            border: 1px solid rgba(61, 158, 255, 0.15);
+            box-shadow: 0 15px 25px -20px #000;
+            backdrop-filter: blur(4px);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: #ceecff;
+            border-left: 5px solid #3d9eff;
+            padding-left: 1rem;
+        }
+
+        .card-title i {
+            color: #3d9eff;
+            font-size: 1.3rem;
+        }
+
+        .bio-text {
+            color: #ccdbe9;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        /* 专业技能列表 */
+        .skill-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .skill-item-detailed {
+            background: #0e1721;
+            border-radius: 1rem;
+            padding: 0.9rem 1.2rem;
+            border-left: 4px solid #3d9eff;
+            transition: 0.2s;
+        }
+        .skill-icon {
+            font-size: 1.4rem;
+            margin-right: 0.7rem;
+            color: #3d9eff;
+            vertical-align: middle;
+        }
+        .skill-text {
+            font-size: 0.95rem;
+            color: #c9e1fa;
+            font-weight: 500;
+        }
+        .skill-desc {
+            font-size: 0.85rem;
+            color: #8db4d4;
+            margin-top: 5px;
+            margin-left: 2rem;
+        }
+
+        /* 项目卡片（仅保留降临项目） */
+        .project-item {
+            background: #0e1721;
+            border-radius: 1.2rem;
+            padding: 1rem 1.3rem;
+            border-left: 4px solid #3d9eff;
+            transition: all 0.2s;
+        }
+        .project-item:hover {
+            background: #121f2d;
+            border-left-width: 6px;
+            transform: translateX(4px);
+        }
+        .project-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0.3rem;
+        }
+        .project-title i {
+            color: #3d9eff;
+        }
+        .project-desc {
+            color: #a3bedb;
+            font-size: 0.9rem;
+            margin-left: 1.6rem;
+            margin-top: 4px;
+        }
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            margin-left: 1.6rem;
+        }
+        .project-tags span {
+            background: #1a2b39;
+            border-radius: 20px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            color: #a1c2e6;
+            border: 1px solid #2c4860;
+        }
+        .project-link {
+            margin-left: 1.6rem;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+        .project-link a {
+            color: #6eb5ff;
+            text-decoration: none;
+        }
+
+        /* 视频卡片 */
+        .video-card {
+            background: rgba(8, 14, 21, 0.7);
+            border-radius: 1.6rem;
+            padding: 1rem 1rem 1.2rem 1rem;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        .video-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #c1dcff;
+            margin-bottom: 0.8rem;
+            padding-left: 0.5rem;
+            border-left: 4px solid #3dc2ff;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            border-radius: 1.2rem;
+            overflow: hidden;
+            border: 1px solid #3d9eff60;
+            box-shadow: 0 0 15px #3d5afe40;
+            background: #050a10;
+        }
+        .video-container video {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 1.2rem;
+            transition: transform 0.2s;
+        }
+        .video-container:hover video {
+            transform: scale(1.01);
+        }
+        .video-caption {
+            margin-top: 0.6rem;
+            font-size: 0.85rem;
+            color: #9bbde2;
+            line-height: 1.4;
+        }
+        .ext-link {
+            margin-top: 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.8rem;
+        }
+        .ext-link a {
+            color: #3d9eff;
+            text-decoration: none;
+            border-bottom: 1px dashed #3d9eff;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #3d9eff70, transparent);
+            margin: 0.6rem 0;
+        }
+
+        @media (max-width: 800px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .glass-panel {
+                padding: 2rem 1.5rem;
+            }
+            .info-line strong {
+                min-width: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="glass-panel">
+    <div class="grid-container">
+        <!-- 左侧个人信息区 + 额外模块（平衡左右） -->
+        <div class="profile-card">
+            <div class="avatar-frame">
+                <div class="avatar" style="background-image: url('file:///C:/Users/Yu/Desktop/FB019A1672572008DDCA72EC03B95CCF.jpg');"></div>
+            </div>
+            <h1 class="name">周依凝 / Zhou Yining</h1>
+            <div class="tagline">语言学探索者 · 汉语国际教育 | Linguistics · TCSOL</div>
+
+            <div class="info-line">
+                <i class="fas fa-user-graduate"></i>
+                <strong>职业 / Occupation:</strong>
+                <span>汉语国际教育专业 在读本科生</span>
+            </div>
+            <div class="info-line">
+                <i class="fas fa-map-marker-alt"></i>
+                <strong>地址 / Location:</strong>
+                <span>中国 · 洛阳</span>
+            </div>
+            <div class="info-line">
+                <i class="fas fa-envelope"></i>
+                <strong>邮箱 / Email:</strong>
+                <a href="mailto:1606320934@qq.com">1606320934@qq.com</a>
+            </div>
+            <!-- 网站部分已完全删除 -->
+
+            <!-- 社交链接（适配语言学/摄影社群） -->
+            <div class="social-links">
+                <a href="#" aria-label="豆瓣"><i class="fab fa-douban"></i></a>
+                <a href="#" aria-label="知乎"><i class="fab fa-zhihu"></i></a>
+                <a href="#" aria-label="哔哩哔哩"><i class="fab fa-bilibili"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+
+            <!-- 额外模块：语言学工具 / 摄影装备，让左侧更丰满 -->
+            <div class="extra-module">
+                <div class="extra-title"><i class="fas fa-tools"></i> 语言学·工具集</div>
+                <div class="extra-tags">
+                    <span><i class="fas fa-microphone-alt"></i> ELAN</span>
+                    <span><i class="fas fa-chart-bar"></i> R / Python</span>
+                    <span><i class="fas fa-database"></i> 语料库</span>
+                    <span><i class="fas fa-camera"></i> 摄影设备</span>
+                    <span><i class="fas fa-drone"></i> 无人机</span>
+                </div>
+            </div>
+
+            <div class="status-line">
+                <span class="dot"></span>
+                <span>研究方向 / Research: 语言相对论 · 认知语言学 · 跨文化传播</span>
+            </div>
+        </div>
+
+        <!-- 右侧主要内容区 -->
+        <div class="main-content">
+
+            <!-- 个人简介卡片 中英双语 -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-terminal"></i>
+                    <span>个人简介 / About Me</span>
+                </div>
+                <div class="bio-text">
+                    学科上，我喜欢探索语言学的一切。语言是一个极其神奇的事物，可以从内到外改变一个人看待世界乃至宇宙的思维方式，甚至改变一直以来人类接触到的线性的时间。<br>
+                    生活中，我喜欢各类运动，喜欢在户外与大自然接触。
+                </div>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; color: #8db4e0; margin-top: 0.3rem;">
+                    <span><i class="fas fa-camera" style="color: #3d9eff;"></i> 摄影/无人机</span>
+                    <span><i class="fas fa-cube" style="color: #3d9eff;"></i> Blender 3D</span>
+                    <span><i class="fas fa-chart-line" style="color: #3d9eff;"></i> 大数据分析</span>
+                </div>
+            </div>
+
+            <!-- 专业技能卡片 (保持不变) -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-cogs"></i>
+                    <span>专业技能 / Professional Skills</span>
+                </div>
+                <div class="skill-list">
+                    <div class="skill-item-detailed">
+                        <span class="skill-icon"><i class="fas fa-video"></i></span>
+                        <span class="skill-text">专业影像摄制</span>
+                        <div class="skill-desc">具有专业摄影摄像设备：无人机、电影级摄影机、运动相机等，能独立完成高质量拍摄与后期。</div>
+                    </div>
+                    <div class="skill-item-detailed">
+                        <span class="skill-icon"><i class="fas fa-cube"></i></span>
+                        <span class="skill-text">Blender 3D 建模</span>
+                        <div class="skill-desc">熟练使用 Blender 进行基础建模、材质渲染，可制作简单的三维概念展示与动画辅助。</div>
+                    </div>
+                    <div class="skill-item-detailed">
+                        <span class="skill-icon"><i class="fas fa-chart-simple"></i></span>
+                        <span class="skill-text">大数据分析处理</span>
+                        <div class="skill-desc">运用 Python、Pandas、可视化工具处理语言学及社会文化数据，洞察语言使用模式。</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 相关项目与作品 (仅保留降临项目) -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-code-branch"></i>
+                    <span>相关项目 / Featured Project</span>
+                </div>
+                <div class="project-item">
+                    <div class="project-title">
+                        <i class="fas fa-language"></i> 电影《降临》· 非线性语言可视化
+                    </div>
+                    <div class="project-desc">
+                        基于Blender与Python，将萨丕尔-沃尔夫假说通过三维粒子系统表达，呈现语言重塑时间感知的艺术装置。
+                    </div>
+                    <div class="project-tags">
+                        <span>Blender</span><span>认知语言学</span><span>交互艺术</span>
+                    </div>
+                    <div class="project-link">
+                        <a href="#">✨ 在线演示</a> &nbsp;|&nbsp; <a href="#">学术随笔</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 视频卡片：语言改变认知世界——《降临》 -->
+            <div class="video-card">
+                <div class="video-title">
+                    <i class="fas fa-film"></i>
+                    <span>语言改变认知世界 —— 电影《降临》 / Arrival & Linguistic Relativity</span>
+                </div>
+                <div class="video-container">
+                    <video controls autoplay muted loop playsinline poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2311212f'/%3E%3Ctext x='15' y='55' fill='%233d9eff' font-size='12' font-family='monospace'%3EArrival%3C/text%3E%3C/svg%3E">
+                        <source src="file:///C:/Users/Yu/Desktop/15799650_da3-1-16.mp4" type="video/mp4">
+                        您的浏览器不支持 video 标签。
+                    </video>
+                </div>
+                <div class="video-caption">
+                    <i class="fas fa-quote-left"></i> “语言是文明的基石，它塑造思维，甚至定义时间的边界。”—— 电影《降临》深刻展示了萨丕尔-沃尔夫假说。视频片段展现非线性语言对认知的冲击。
+                </div>
+                <div class="ext-link">
+                    <a href="https://movie.douban.com/subject/21324900/" target="_blank" rel="noopener">🎬 豆瓣电影《降临》</a>
+                    <a href="https://zh.wikipedia.org/wiki/%E8%90%BD%E5%9C%B0_(%E7%94%B5%E5%BD%B1)" target="_blank" rel="noopener">📖 维基百科 · 语言相对论</a>
+                    <a href="#" target="_blank">📝 我的语言学笔记：时间与环形文字</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部版权信息（已删除《你一生的故事》板块） -->
+    <div style="margin-top: 2rem; text-align: center; font-size: 0.75rem; color: #527a9b; border-top: 1px dashed #2e445d; padding-top: 1rem;">
+        <i class="fas fa-copyright"></i> 2025 周依凝 · 语言学视界 | 汉语国际教育 | 科技与人文的融合
+    </div>
+</div>
+</body>
+</html>
